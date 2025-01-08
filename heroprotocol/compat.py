@@ -8,8 +8,20 @@ import json
 import six
 
 
+def defaultJsonHandler(obj):
+    try:
+        if type( obj ) is bytes:
+            return obj.decode('utf-8')
+        else:
+            return obj
+    except:
+        if type( obj ) is bytes:
+            return obj.hex()
+        else:
+            return None
+
 def json_dumps(obj, encoding):
     if six.PY3:
-        return json.dumps(obj, ensure_ascii=True)
+        return json.dumps(obj, default=defaultJsonHandler, ensure_ascii=True)
     else:
-        return json.dumps(obj, encoding=encoding)
+        return json.dumps(obj, default=defaultJsonHandler, encoding=encoding)

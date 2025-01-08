@@ -30,7 +30,7 @@ class EventLogger:
             self._event_stats[event['_event']] = stat
         # write structure
         if self.args.json:
-            print(json_dumps(event, encoding='iso-8859-1'))
+            print(json_dumps(event, encoding='utf-8'))
         else:
             pprint.pprint(event, stream=output, width=120)
 
